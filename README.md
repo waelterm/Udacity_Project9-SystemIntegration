@@ -1,4 +1,4 @@
-#Capstone - System Integration
+# Capstone - System Integration
 
 This is the project repo includes my solution for the capstone project of the Udacity Self-Driving Car Nanodegree. 
 This System Integration project was mainly done using ROS and included 4 main components:
@@ -17,7 +17,7 @@ After the traffic light detection and classification algorithm have been created
 If the light was red, the velocity of all waypoints up to the stop line was decreased with the waypoint near the stopline being 0.
 Once the light turned green, the speed of all waypoints was set to 10 m/s again.
 
-# Controls
+### Controls
 
 The controls was broken down in lateral and longitudinal controls.  
 The reference signal were provided by Autoware's waypoint_follower node.
@@ -28,14 +28,14 @@ For lateral control, the provided Yaw controller has been implemented.
 
 While the controllers can be found in the twist_controller.py file, the dbw_node.py includes the node that publishes the torque, brake, and steering controls to the vehicle.
 
-# Traffic Light Detection
+### Traffic Light Detection
 
 The information about the pose of the vehicle was used to find the position of the nearest traffic light according to the map.
 If the traffic light is within 50 meters of the vehicle and ahead of the vehicle, the image from the camera is parsed to the Traffic sign classification algorithm.
 If the traffic light is classified as red twice in a row, the waypoint index of the stop line associated with the traffic light will be published.
 This topic will be used by the waypoint_updater to adjust the reference velocity of the waypoints. 
 
-# Traffic Light Classification
+### Traffic Light Classification
 
 After unsuccessfully trying to train a CNN on the entire camera image for classification, I changed my strategy and decided that transfer learning might be a better approach. 
 I retrained a faster RCNN model (faster_rcnn_inception_v2_coco_2019_01_28). This network is part of the the Tensorflow Detection API that can be found in this [repository](https://github.com/tensorflow/models).
@@ -49,17 +49,16 @@ Furthermore, I used the following repositories and articles to learn about traff
 * [Article 3 ](https://medium.com/@UdacityINDIA/self-driving-vehicles-traffic-light-detection-and-classification-with-tensorflow-object-detection-d6a4d25e99c2)
 
 
-# Team Members
-I completed the project by myself:
-
-Name: Philipp Waeltermann
-Email: pwaelte1@ford.com
-
+## Team Members
 While I did not work with other student's on the project, I do want to thank my Co-workers who have been a great resource.
 Thank you to [Sagar](https://www.linkedin.com/in/sagarmanglani) for helping me fix latency issues with the simulator.
-And thank you to [Lily](https://www.linkedin.com/in/alchemz) for helping me set up the environment for Training the Traffic Light Classifier.
+And thank you to [Lily](https://www.linkedin.com/in/alchemz) for helping me set up the environment for training the Traffic Light Classifier.
 
-# Instructions for Running the code
+Name: Philipp Waeltermann  
+Email: pwaelte1@ford.com
+
+
+## Instructions for Running the code
 
 * Be sure that your workstation is running Ubuntu 16.04 Xenial Xerus or Ubuntu 14.04 Trusty Tahir. [Ubuntu downloads can be found here](https://www.ubuntu.com/download/desktop).
 * If using a Virtual Machine to install Ubuntu, use the following configuration as minimum:
@@ -112,23 +111,6 @@ source devel/setup.sh
 roslaunch launch/styx.launch
 ```
 4. Run the simulator
-
-### Real world testing
-1. Download [training bag](https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/traffic_light_bag_file.zip) that was recorded on the Udacity self-driving car.
-2. Unzip the file
-```bash
-unzip traffic_light_bag_file.zip
-```
-3. Play the bag file
-```bash
-rosbag play -l traffic_light_bag_file/traffic_light_training.bag
-```
-4. Launch your project in site mode
-```bash
-cd CarND-Capstone/ros
-roslaunch launch/site.launch
-```
-5. Confirm that traffic light detection works on real life images
 
 ### Other library/driver information
 Outside of `requirements.txt`, here is information on other driver/library versions used in the simulator and Carla:
