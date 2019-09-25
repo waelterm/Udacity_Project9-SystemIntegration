@@ -5,7 +5,7 @@ import datetime
 
 class TLClassifier(object):
     def __init__(self):
-        TrainedModelPath = r'light_classification/model/frozen_inference_graph.pb'
+        TrainedModelPath = r'light_classification/model/faster_rcnn_frozen_inference_graph.pb'
         self.graph = tf.Graph()
         self.threshold = .5
 
